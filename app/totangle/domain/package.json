@@ -1,0 +1,36 @@
+{
+    "name": "mam.client.js",
+    "private": false,
+    "version": "0.0.4",
+    "main": "lib/mam.client.js",
+    "scripts": {
+        "node": "webpack --progress --colors --watch --env node",
+        "web": "browserify -r ./src/node.js:mam.web.js > ./lib/mam.web.js",
+        "build": "webpack",
+        "compress": "uglifyjs lib/mam.client.js -c -m -o lib/mam.client.min.js & uglifyjs lib/mam.web.js -c -m -o lib/mam.web.min.js"
+    },
+    "engines": {
+        "node": ">=6"
+    },
+    "dependencies": {
+        "@iota/converter": "^1.0.0-beta.5",
+        "@iota/core": "^1.0.0-beta.6",
+        "@iota/curl": "^1.0.0-beta.5",
+        "babel-polyfill": "^6.26.0",
+        "body-parser": "^1.18.3",
+        "browserify": "^16.1.1",
+        "iota-generate-seed": "^1.0.0",
+        "pify": "^3.0.0",
+        "router": "^1.3.3"
+    },
+    "devDependencies": {
+        "babel-cli": "6.26.0",
+        "babel-core": "6.26.0",
+        "babel-eslint": "8.0.1",
+        "babel-loader": "7.1.2",
+        "babel-plugin-add-module-exports": "0.2.1",
+        "babel-preset-env": "1.6.1",
+        "uglify-js": "mishoo/UglifyJS2#harmony",
+        "webpack": "3.7.1"
+    }
+}

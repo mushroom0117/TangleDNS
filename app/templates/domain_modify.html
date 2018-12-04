@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Record Owner Mode</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+    <style>
+        .bd1 {
+            border-style: outline;
+            border-width: medium;
+            border-radius: 8px;
+        }
+        
+        .div1 {
+            margin-top: 75px;
+   margin-bottom:150px;
+            width: 75%;
+            padding-top: 20px;
+            padding-left: 25px;
+            padding-bottom: 100px;
+            box-shadow: 4px 4px 20px 15px rgba(20%, 20%, 20%, 20%);
+        }
+        
+        .hor {
+            border: 0;
+            height: 0;
+            border-top: 1px solid rgba(0, 0, 0, 0.1);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .btn1 {
+            width: 40px;
+            height: 30px;
+            font-size: 15px;
+            font-weight: bold;
+            border-width: 1.5px;
+        }
+        
+        .td1 {
+            padding: 10px;
+            width: 25%;
+        }
+        
+        .two {
+            border-style: solid;
+            border-width: 0px 0px 2px 0px;
+        }
+        
+        .btn2 {
+            border-width: 1.5px;
+            border-style: solid;
+            width: 75px;
+            border-radius: 10px;
+        }
+        
+        .butsub {
+            width: 90px;
+            height: 30px;
+            border-radius: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-11 mx-auto  border-secondary two">
+        <nav class="navbar navbar-expand-sm navbar-light h6" style="background-color: #FFFFFF;">
+            <a class="navbar-brand font-weight-bold" href="/">TangleDNS</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-link dropdown">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false">TLD</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item " href="/">Register</a>
+                        <a class="dropdown-item" href="/tld_exp">Explorer</a>
+                        <a class="dropdown-item" href="/tld_mana">Manage</a>
+                    </div>
+                </li>
+                <li class="nav-link dropdown active">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Domain
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/domain">Register</a>
+                        <a class="dropdown-item" href="/domain_exp">Explorer</a>
+                        <a class="dropdown-item active" href="/domain_mana">Manage</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container-fluid bd1 div1 mx-auto">
+        <div class="text-muted" style="font-size:20px;text-align:right">Owner Mode</div>
+        <div class="row">
+            <div class="col"><span style="font-size:25px"><strong>{{manag_name}}</strong></span></div>
+        </div>
+        <div class="row">
+            <div class="col-lg-10 "><span style="color:black ;line-height: 1.8;"></span></div>
+        </div>
+        <div>
+            <hr class="hor">
+            </hr>
+        </div>
+        <nav class="navbar  navbar-light bg-light ">
+            <form class="form-inline " action="/domain_mana/modify" method="POST">
+                <input class="form-control mr-sm-2" type="text" id="name" name="name" placeholder="@">
+                <select name="type" class="size:2" id="type" name="type" style="margin-right:10px; border-radius: 4px;height:37px">
+                    <option value="A">A</option>
+                    <option value="AAAA">AAAA</option>
+                    <option value="CAA">CAA</option>
+                    <option value="CNAME">CNAME</option>
+                    <option value="DS">DS</option>
+                    <option value="MX">MX</option>
+                    <option value="NS">NS</option>
+                    <option value="PTR">PTR</option>
+                    <option value="SPF">SPF</option>
+                    <option value="SRV">SRV</option>
+                    <option value="SSHFP">SSHFP</option>
+                    <option value="TLSA">TLSA</option>
+                    <option value="TXT">TXT</option>
+                </select>
+                <input class="form-control mr-2" size="2" id="ttl" name="ttl" type="text" placeholder="1H">
+                <input class="form-control " size="63" id="address" name="address" type="text" placeholder="IPv4 Address">
+                <button type="submit" value="add" name="action" class="btn btn-outline-primary mx-3" style="font-weight: bold;border-radius: 15px;border-width:1.5px;"
+                    id="add">Add</button>
+        </nav>
+        <table class="" style="width:100%;">
+            <tr class="text-muted" style="line-height: 2.4">
+                <th>Name </th>
+                <th>Type </th>
+                <th>TTL </th>
+                <th>Record </th>
+            </tr>
+            <tr style="color:blue">
+                <td class="td-1">
+                    <div style="color:rgb(28, 73, 118);line-height: 30px;">
+                        {% for n in range(count): %}
+                        {{ answer_section[n]['Name'] }}
+                        <br>{% endfor %}
+                    </div>
+                </td>
+                <td class="td-1">
+                    <div style="color:rgb(28, 73, 118);line-height: 30px;">
+                        {% for n in range(count): %}
+                        {{ answer_section[n]['TTL'] }}
+                        <br>{% endfor %}
+                    </div>
+                </td>
+                <td class="td-1">
+                    <div style="color:rgb(28, 73, 118);line-height: 30px;">
+                        {% for n in range(count): %}
+                        {{ answer_section[n]['Type'] }}
+                        <br>{% endfor %}
+                    </div>
+                </td>
+                <td class="td-1">
+                    <div style="color:rgb(28, 73, 118);line-height: 30px;">
+                        {% for n in range(count): %}
+                        {{ answer_section[n]['Address'] }}
+                        <br>{% endfor %}
+                    </div>
+                </td>
+                <!--<td>
+                    <button type="button" class="btn btn-outline-primary btn-sm btn1 mx-1 butsub"><a id="a4" onclick="cg(this)">Edit</button></td>-->
+                <td>
+                    {% with messages = get_flashed_messages() %}
+                    {% if messages %}
+                    {% for message in messages %}
+                    {{ message }}
+                    {% endfor %}
+                    {% endif %}
+                    {% endwith %}
+                </td>
+            </tr>
+        </table>
+        </form>
+        <center><input type="button" onclick="location.href='/domain_mana/modify/sucs'" value="Done" name="action"
+                class="btn btn-outline-primary btn2" style="font-weight: bold;"></input></center>
+    </div>
+
+</body>
+
+</html>

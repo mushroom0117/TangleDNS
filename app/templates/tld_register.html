@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+        crossorigin="anonymous">
+    <title>註冊TLD (Register A TLD) </title>
+    <style>
+        .navbar {
+            padding: 0;
+        }
+        
+        .container {
+            border: 10px solid #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 50px;
+        }
+        
+        .two {
+            border-style: solid;
+            border-width: 0px 0px 2px 0px;
+        }
+        
+        .btn {
+            height: 45px;
+            width: 120px;
+        }
+
+        .alert-success {
+            color:red;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="col-11 mx-auto  border-secondary two">
+        <nav class="navbar navbar-expand-sm navbar-light h6" style="background-color: #FFFFFF;">
+            <a class="navbar-brand font-weight-bold" href="/">TangleDNS</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-link dropdown active">
+                    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true"
+                        aria-expanded="false">TLD</a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item active" href="/">Register</a>
+                        <a class="dropdown-item" href="/tld_exp">Explorer</a>
+                        <a class="dropdown-item" href="/tld_mana">Manage</a>
+                    </div>
+                </li>
+                <li class="nav-link dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                        aria-haspopup="true" aria-expanded="false">
+                        Domain
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/domain">Register</a>
+                        <a class="dropdown-item" href="/domain_exp">Explorer</a>
+                        <a class="dropdown-item" href="/domain_mana">Manage</a>
+                    </div>
+                </li>
+            </ul>
+        </nav>
+    </div>
+    <div class="container border shadow-lg  mb-5 bg-white mx-auto">
+        <div class="col-8 mx-auto">
+            <nav class="mx-auto w-50 mb-4" style="width: 500px;">
+                <h3 class="text-center">Register A TLD </h3>
+            </nav>
+            <form class="form  my-2 my-lg-0 " action="/to/tld_register" method="POST">
+                <fieldset disabled>
+                    <div>
+                        <input class="form-control mr-sm-2 mb-3" id="tld_name" name="tld_name" type="text" placeholder="TLD Name : {{ b }}"
+                            disabled>
+                    </div>
+                </fieldset>
+                <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your name." aria-label="Search"
+                    id="admin_name" name="admin_name">
+                <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your email." aria-label="Search"
+                    id="admin_email" name="admin_email"><p style="color:red">{{ wrong }}</p>
+                <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your phone." aria-label="Search"
+                    id="admin_phone" name="admin_phone">
+                <p class=" mb-0 alert alert-secondary" style="color:gray"> 註冊名字、信箱、電話 以對此新頂級域名註冊身分</p>
+                <div class="col-8 mb-0 alert alert-success font-weight-bold" role="alert">
+                    {% for message in get_flashed_messages() %}
+                    {{ message }}
+                    {% endfor %}
+                </div>
+
+                <center>
+                    <button class="btn btn-outline-primary mt-2 my-2 mb-3 font-weight-bold" type="submit" data-toggle="modal"
+                        data-target="#exampleModalCenter" onclick="location.href='/tld_search/to/tld_register/sucs'">Go</button>
+                </center>
+                <!-- Modal 
+					<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+					  <div class="modal-dialog modal-dialog-centered" role="document">
+						<div class="modal-content">
+						  <div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">TLD Register</h5>
+							<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							  <span aria-hidden="true">&times;</span>
+							</button>
+						  </div>
+						  <div class="col-8 mx-auto">
+								<p>Your TLD Name    : 		{{ b[0] }}</p>
+								<p>Your Admin Name  : 		{{ b[1] }}</p>
+								<p>Your Admin Email : 		{{ b[2] }}</p>
+								<p>Your Admin Phone : 		{{ b[3] }}</p>
+						  </div>
+						  <div class="modal-footer">
+							<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-primary">Submit</button>
+						  </div>
+						</div>
+					  </div>-->
+        </div>
+        </form>
+    </div>
+    </div>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js" integrity="sha384-smHYKdLADwkXOn1EmN1qk/HfnUcbVRZyYmZ4qpPea6sjB/pTJ0euyQp0Mk8ck+5T"
+        crossorigin="anonymous"></script>
+</body>
+
+</html>
