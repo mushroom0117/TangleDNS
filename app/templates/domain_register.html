@@ -29,6 +29,12 @@
             height: 45px;
             width: 120px;
         }
+
+        .alert-success {
+            color:red;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
     </style>
 </head>
 
@@ -70,8 +76,8 @@
                             </div>  
                            </fieldset>
                     <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your name." aria-label="Search" id="admin_name" name="admin_name">
+                    <small id="admin_email_error" class="form-text mr-sm-2" style="color:red">{{ wrong_email }}</small>
                     <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your email." aria-label="Search" id="admin_email" name="admin_email">
-                    <p style="color:red">{{ wrong }}</p>
                     <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your phone." aria-label="Search" id="admin_phone" name="admin_phone"> 
                     <p class=" mb-0 alert alert-secondary" style="color:gray"> 註冊名字、信箱、電話 以對此新網域名稱註冊身分</p>
                     <!-- <input class="form-control mr-sm-2 mb-3" type="search" placeholder="Input your Seed." aria-label="Search" id="tld_seed" name="tld_seed">  -->

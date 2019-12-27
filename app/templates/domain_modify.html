@@ -63,6 +63,12 @@
             height: 30px;
             border-radius: 15px;
         }
+
+        .alert-success {
+            color:red;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
     </style>
 </head>
 
@@ -128,7 +134,13 @@
                 <input class="form-control " size="63" id="address" name="address" type="text" placeholder="IPv4 Address">
                 <button type="submit" value="add" name="action" class="btn btn-outline-primary mx-3" style="font-weight: bold;border-radius: 15px;border-width:1.5px;"
                     id="add">Add</button>
+
         </nav>
+        <div class="col-8 mb-0 alert alert-success font-weight-bold" role="alert">
+                {% for message in get_flashed_messages() %}
+                {{ error_message }}
+                {% endfor %}
+            </div>
         <table class="" style="width:100%;">
             <tr class="text-muted" style="line-height: 2.4">
                 <th>Name </th>
@@ -179,6 +191,8 @@
             </tr>
         </table>
         </form>
+        
+        <br><br>
         <center><input type="button" onclick="location.href='/domain_mana/modify/sucs'" value="Done" name="action"
                 class="btn btn-outline-primary btn2" style="font-weight: bold;"></input></center>
     </div>

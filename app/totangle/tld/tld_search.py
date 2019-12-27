@@ -4,7 +4,7 @@ import json
 
 def IOTA_config():
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     api = Iota(url)
 
 def get_tld_content(tld_name):

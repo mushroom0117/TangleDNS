@@ -9,7 +9,7 @@ import time
 def IOTA_config(tld_owner_seed):
     global api
     global seed
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     seed = tld_owner_seed
     api = Iota(url,seed)
 

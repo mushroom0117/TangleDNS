@@ -3,7 +3,7 @@ from wtforms import *
 from iota import *
 from random import SystemRandom
 from pprint import pprint
-import json, time, ast, os
+import json, time, ast, os ,re
 from wtforms.validators import Email
 from app.totangle.domain.domain_register import domain_register_to_tangle,check_domain_exist,create_owner_auth,create_domain_content,generate_new_seed
 from app.totangle.domain.domain_search import find_domain
@@ -128,17 +128,12 @@ def domain_register():
         #tld_seed = request.form['tld_seed']
         if '@' not in admin_email:
             print("Registration failed!")
-            wrong = "!"
+            wrong_email = "!"
             flash("請輸入正確的格式")
-            return render_template('domain_register.html', runForm=form, b=url,wrong=wrong)
+            return render_template('domain_register.html', runForm=form, b=url,wrong_email=wrong_email)
         if form.validate():
             seed = generate_new_seed()
             key = create_owner_auth(seed)
-            '''
-            with open('./app/totangle/demo_json/domain/domain_demo.json' , 'r') as reader:
-                tld_demo_dict = json.loads(reader.read())
-                domain_content = json.dumps(tld_demo_dict)
-            '''
             domain_content = create_domain_content(admin_email, admin_phone, key)
             domain_info = domain_register_to_tangle(url,domain_content,seed)#,tld_seed)
             #info = "\nMAM Root:\n"+"\nTLD Address:\n".join(domain_info)
@@ -186,17 +181,28 @@ def domain_manage():
         manag_name = request.form['manag_name']
         manag_seed = request.form['manag_seed']
         if form.validate():
-            if check_domain_owner(manag_seed,manag_name) == True:
-                session['manag_name'] = manag_name
-                session['manag_seed'] = manag_seed
-                return redirect(url_for('domain.domain_modify'))
-            else :
-                message = "Seed is wrong."
+            if check_domain_exist(manag_name) == "tld_not_found":
+                message = "TLD Name IS NOT FOUND!"
                 return render_template('domain_manage.html', runForm=form, message=message)
+
+            elif check_domain_exist(manag_name) == "domain_available":
+                message = "Domain Name IS NOT FOUND!"
+                return render_template('domain_manage.html', runForm=form, message=message)
+
+            elif check_domain_exist(manag_name) == "domain_exist":
+                if check_domain_owner(manag_seed,manag_name) == True:
+                    session['manag_name'] = manag_name
+                    session['manag_seed'] = manag_seed
+                    return redirect(url_for('domain.domain_modify'))
+                else :
+                    message = "Seed is wrong."
+                    return render_template('domain_manage.html', runForm=form, message=message)
+            
     return render_template('domain_manage.html', runForm=form)
 
 @domain.route('/domain_mana/modify', methods = ['POST', 'GET'])
 def domain_modify():
+    error_message = ''
     show = ''
     modify = ''
     manag_name = session.get('manag_name', None)
@@ -232,6 +238,15 @@ def domain_modify():
             type = request.form['type']
             ttl = request.form['ttl']
             address = request.form['address']
+            #####check the type and record is matched
+            if type == "A":
+                pat = re.compile(r'([0-9]{1,3})\.')
+                r = re.findall(pat,address+".")
+                if len(r) != 4 or len([x for x in r if int(x)>=0 and int(x)<=255]) !=4:
+                    error_message = "Notice : The record format is wrong!"
+            if type == "AAAA":
+                if ":" not in address:
+                    error_message = "Notice : The record format is wrong!"
             add_info = "{\n \"Name\":"+"\""+name+"\""+",\n \"TTL\":"+"\""+str(ttl)+"\""+",\n \"Type\":"+"\""+type+"\""+",\n \"Address\":"+"\""+address+"\"\n}"
             add_info_dict = json.loads(add_info)
             f = open(manag_name,"a")
@@ -252,7 +267,7 @@ def domain_modify():
                     break
                 i+=1
             #for n in range(count):
-            return render_template('domain_modify.html', runForm=form, c=show ,manag_name=manag_name, count=count, answer_section=answer_section)
+            return render_template('domain_modify.html', runForm=form, c=show ,manag_name=manag_name, count=count, answer_section=answer_section, error_message=error_message)
         if (request.form["action"]):
             n = 1
             while(True):

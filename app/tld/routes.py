@@ -93,9 +93,9 @@ def tld_register():
         #if form.validate() == False:
         if '@' not in admin_email:
             print("Registration failed!")
-            wrong = "!"
+            wrong_email = "!"
             flash("請輸入正確的格式")
-            return render_template('tld_register.html', runForm=form, wrong=wrong,b=tld_name)
+            return render_template('tld_register.html', runForm=form, wrong_email=wrong_email,b=tld_name)
         if form.validate():
             seed = generate_new_seed()
             key = create_owner_auth(seed)
@@ -104,7 +104,7 @@ def tld_register():
             info = "\nAddress:\n".join(tld_info)
             check = [info,tld_name,admin_name,admin_email,admin_phone]
             return render_template('tldregister_success.html', runForm=form, b=check)
-    return render_template('tld_register.html', runForm=form, b=tld_name,wrong=wrong)
+    return render_template('tld_register.html', runForm=form, b=tld_name)
 
 # if reg success then show 
 class tldregister_sucs_form(Form):

@@ -47,7 +47,7 @@ def get_tld_content(tld_name):
 
 def IOTA_config():
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     api = Iota(url)
 
 def get_domain_root(tld_name,domain_name):

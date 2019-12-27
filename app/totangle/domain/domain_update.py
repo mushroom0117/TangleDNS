@@ -10,13 +10,13 @@ import hashlib
 
 def IOTA_config(tld_owner_seed):
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     seed = tld_owner_seed
     api = Iota(url,seed)
 
 def IOTA_config_non_seed():
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     api = Iota(url)
             
 def generate_new_address():
@@ -81,6 +81,7 @@ def check_domain_owner(seed,url):
     domain_content = find_domain(url)[0]
     domain_content = json.loads(domain_content)
     auth_code = domain_content['Signature']['Auth']
+    print(auth_code)
     if key == auth_code:
         return True
     else:

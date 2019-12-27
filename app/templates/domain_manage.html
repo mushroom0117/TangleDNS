@@ -32,6 +32,12 @@
             height: 45px;
             width: 120px;
         }
+        
+        .alert-success {
+            color:red;
+            background-color: #ffffff;
+            border-color: #ffffff;
+        }
     </style>
 
 </head>
@@ -75,7 +81,9 @@
             <form class="form  my-2 my-lg-0 " action="/domain_mana" method="POST">
                 <input class="form-control mr-sm-2 mb-5" id="manag_name" name="manag_name" type="search" placeholder=" Input your Domain name …" aria-label="Search">
                 <input class="form-control mr-sm-2 mb-5" id="manag_seed" name="manag_seed" type="search" placeholder=" Input your MAM Seed …" aria-label="Search">
-                {{ message }}
+                <div class="col-8 mb-0 alert alert-success font-weight-bold" role="alert">
+                    {{ message }}
+                </div>
                 <center>
                     <button class="btn btn-outline-primary my-2 font-weight-bold" id="domain_log" name="domain_log" type="submit">Go</button>
                 </center>

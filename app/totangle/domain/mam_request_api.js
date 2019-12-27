@@ -21,12 +21,12 @@ let mamState
 
 async function MAM_init () {
   const seed = generate()
-  mamState = await Mam.init('http://node.deviceproof.org:14266',seed)
+  mamState = await Mam.init('https://node1.puyuma.org:443',seed)
   return seed
 }
 
 async function MAM_init_update () {
-  mamState = await Mam.init('http://node.deviceproof.org:14266', seed_seed)
+  mamState = await Mam.init('https://node1.puyuma.org:443', seed_seed)
   console.log(+startCount)
   mamState.channel.start = +startCount
 }

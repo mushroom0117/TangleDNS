@@ -22,12 +22,12 @@ def generate_new_seed():
 # IOTA API config 
 def IOTA_config(seed):
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     api = Iota(url,seed)
 
 def IOTA_config_noseed():
     global api
-    url = 'http://node.deviceproof.org:14266'
+    url = 'https://node1.puyuma.org:443'
     api = Iota(url)
 
 def generate_new_address():

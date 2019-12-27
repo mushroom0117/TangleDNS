@@ -92,14 +92,20 @@
             <div class="row">
                 <div class="col"><span style="font-size:25px"><strong>{{ manag_name }}</strong></span></div>
             </div>
-            <center>
             <div class="row">
-                <div class="col-lg-12 "><span style="color:red ;line-height: 1.8;">Here is your New MAM Root !</span></div>
-                <div class="col-lg-12 "><span style="color:black ;line-height: 1.8;">New MAM Root:<br>{{ new_root }}</span></div>
+                <div class="col-lg-12 "><span style="color:red ;line-height: 1.8;">
+                        新的 Domain Name 紀錄將會儲存在以下 MAM Root：
+                    </span></div>
+                    <hr class="hor">
+                </hr>
+                <div class="col-lg-12 "><span style="color:black ;line-height: 1.8;">
+                        New MAM Root:<br>{{ new_root }}</span></div>
             </div>
-            </center>
             <center>
-                <input type="button" value="Done" class="btn btn-outline-primary btn2" style="font-weight: bold;" onclick="location.href='/domain_mana'"></input>
+                <br><br>
+
+                <input type="button" value="Done" class="btn btn-outline-primary btn2" style="font-weight: bold;"
+                    onclick="location.href='/domain_mana'"></input>
             </center>
         </div>
     </form>
